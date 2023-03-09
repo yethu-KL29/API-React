@@ -9,15 +9,14 @@ Chart.register(CategoryScale);
 
 export default function App() {
   const [plotData, setplotData] = useState();
-  const dataset1 =[]
-  const dataset2=[]
+  const [info, setinfo] = useState([])
   const Chartdata = {
     labels: ['Red', 'Orange', 'Blue'],
     // datasets is an array of objects where each object represents a set of data to display corresponding to the labels above. for brevity, we'll keep it at one object
     datasets: [
         {
           label: 'Popularity of colours',
-          data:dataset1,
+          data:info,
           // you can set indiviual colors for each bar
           backgroundColor: [
             'blue',
@@ -35,9 +34,11 @@ export default function App() {
       
       const data = await response.data;
       setplotData(data);
-     
+      const dataset1 =[]
+      const dataset2=[]
        for(const val of data){
         dataset1.push(val.id)
+        setinfo(dataset1)
        }
        console.log(dataset1);
   
@@ -50,7 +51,7 @@ export default function App() {
       <Barchart chartData={Chartdata} />
       {plotData && plotData.map((item=>{
          return(
-          <h1>{dataset1}</h1>
+          <h1>{item.id}</h1>
          )
       }))}
     </div>
